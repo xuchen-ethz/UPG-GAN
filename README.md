@@ -2,13 +2,16 @@
 
 <br><br><br>
 
-# Unpaired Pose-Guided Human Image Generation
+# UPG-GAN
+This is the code base for our paper [**Unpaired Pose-Guided Human Image Generation**](todo: add link).We propose a new network architecture to generate human images from body part models, with unpaired training dataset.
 
+Here you can find the necessary training and testing code, and the datasets and pre-trained models for **shirt and tshirt**(upper body)
+ and **suit and dress** (full body).
 
 ## Prerequisites
 - Linux or macOS
 - Python 2 or 3
-- CPU or NVIDIA GPU + CUDA CuDNN
+- NVIDIA GPU + CUDA CuDNN
 
 ## Getting Started
 ### Installation
@@ -43,6 +46,7 @@ cd UPG-GAN
     - ``name``: the name of the model, make sure the model exists under ``./checkpoint/``
     - ``how_many``: number of input images to test
     - ``n_samples``: number of samples per input image
+- Test the model: ``./testing.sh``
     
     
 ### Training
