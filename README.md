@@ -1,4 +1,9 @@
-<img src='imgs/suit.gif' align="right" width=384>
+<img src='imgs/suit.gif' align="right" width=384> <img src='imgs/dress.gif' align="right" width=384>
+
+
+
+
+
 
 <br><br><br>
 
