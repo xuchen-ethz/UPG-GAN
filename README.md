@@ -2,7 +2,7 @@
 # UPG-GAN
 This is the code base for our paper [**Unpaired Pose-Guided Human Image Generation**](todo: add link).We propose a new network architecture to generate human images from body part models, with unpaired training dataset.
 
-Here you can find the necessary training and testing code, and the datasets and pre-trained models for **shirt and tshirt**(upper body)
+Here you can find the necessary training and testing code, and the datasets and pre-trained models for **shirt and tshirt** (upper body)
  and **suit and dress** (full body).
 
 <img src='imgs/suit.gif' width=384> <img src='imgs/dress.gif' width=384>
