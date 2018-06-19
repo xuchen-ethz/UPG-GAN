@@ -5,7 +5,7 @@ This is the code base for our paper [**Unpaired Pose-Guided Human Image Generati
 Here you can find the necessary training and testing code, and the datasets and pre-trained models for **shirt and tshirt**(upper body)
  and **suit and dress** (full body).
 
-<img src='imgs/suit.gif' align="right" width=384> <img src='imgs/dress.gif' align="right" width=384>
+<img src='imgs/suit.gif' width=384> <img src='imgs/dress.gif' width=384>
 
 ## Prerequisites
 - Linux or macOS
@@ -46,8 +46,8 @@ cd UPG-GAN
     - ``how_many``: number of input images to test
     - ``n_samples``: number of samples per input image
 - Test the model: ``./testing.sh``
-    
-    
+
+
 ### Training
 - Configure the following arguments in ``./training.sh``:
     - ``dataroot``: the path to the dataset
