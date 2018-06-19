@@ -32,6 +32,7 @@ class TrainOptions(BaseOptions):
         self.parser.add_argument('--lambda_z', type=float, default=10, help='weight for latent regressor loss')
         self.parser.add_argument('--lambda_class', type=float, default=10, help='weight for semi-supervision loss')
 
+        self.parser.add_argument('--cond_D', action='store_true', help='condition the discriminator on the class label')
         self.parser.add_argument('--use_random_z', action='store_true', help='use random z to train the network')
 
         self.isTrain = True

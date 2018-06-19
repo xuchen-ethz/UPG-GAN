@@ -19,14 +19,6 @@ class AECycleGANModel(BaseModel):
     def initialize(self, opt):
         BaseModel.initialize(self, opt)
 
-        nb = opt.batchSize
-        size = opt.fineSize
-        nz = opt.nz
-
-        # load/define networks
-        # The naming conversion is different from those used in the paper
-        # Code (paper): G_A (G), G_B (F), D_A (D_Y), D_B (D_X)
-
         self.netE = networks.define_E(opt.output_nc, opt.nz, opt.nef,
                                       which_model_netE=opt.which_model_netE,
                                       norm=opt.norm, nl=opt.nl,
@@ -44,9 +36,15 @@ class AECycleGANModel(BaseModel):
 
         if self.isTrain:
             use_sigmoid = opt.no_lsgan
-            self.netD_A = networks.define_D(opt.output_nc, opt.ndf,
-                                            opt.which_model_netD,
-                                            opt.n_layers_D, opt.norm, use_sigmoid, opt.init_type, self.gpu_ids)
+            if opt.cond_D:
+                self.netD_A = networks.define_D(opt.output_nc + opt.cond_nc, opt.ndf,
+                                                opt.which_model_netD,
+                                                opt.n_layers_D, opt.norm, use_sigmoid, opt.init_type, self.gpu_ids)
+            else:
+                self.netD_A = networks.define_D(opt.output_nc, opt.ndf,
+                                                opt.which_model_netD,
+                                                opt.n_layers_D, opt.norm, use_sigmoid, opt.init_type, self.gpu_ids)
+
             self.netD_B = networks.define_D(opt.input_nc, opt.ndf,
                                             opt.which_model_netD,
                                             opt.n_layers_D, opt.norm, use_sigmoid, opt.init_type, self.gpu_ids)
@@ -109,7 +107,7 @@ class AECycleGANModel(BaseModel):
         self.input_B = input_B
         self.image_paths = input['A_paths' if AtoB else 'B_paths']
 
-        if self.opt.cond_nc > 0:
+        if self.opt.cond_nc > 0 and self.opt.isTrain:
             input_C = input['C']
             if len(self.gpu_ids) > 0:
                 input_C = input_C.cuda(self.gpu_ids[0], async=True)
@@ -160,8 +158,18 @@ class AECycleGANModel(BaseModel):
         return loss_D
 
     def backward_D_A(self):
-        fake_B = self.fake_B_pool.query(self.fake_B)
-        loss_D_A = self.backward_D_basic(self.netD_A, self.real_B, fake_B)
+        if self.opt.cond_D:
+            b,_,h,w = self.fake_B.size()
+            c = self.opt.cond_nc
+            c_img = self.real_C.view(b, c, 1, 1).expand(b,c,h,w)
+            fake_B = torch.cat([self.fake_B, c_img], dim=1)
+            real_B = torch.cat([self.real_B, c_img], dim=1)
+        else:
+            fake_B = self.fake_B
+            real_B = self.real_B
+
+        fake_B = self.fake_B_pool.query(fake_B)
+        loss_D_A = self.backward_D_basic(self.netD_A, real_B, fake_B)
         self.loss_D_A = loss_D_A.data[0]
 
     def backward_D_B(self):
