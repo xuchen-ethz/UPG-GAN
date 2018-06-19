@@ -63,7 +63,7 @@ The test results will be saved to a html file here: `./results/suit_and_dress/la
 
 
 ## Citation
-If you use this code for your research, please cite our papers.
+If you find this repository useful for your research, please cite our paper.
 ```
 to be added
 ```
