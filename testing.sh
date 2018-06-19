@@ -1,6 +1,6 @@
 #!/bin/bash
 python test_vae.py \
-    --dataroot ./datasets/body2image_shirt_and_tshirt//        \
+    --dataroot ./datasets/body2image_shirt_and_tshirt/        \
     --dataset_mode unaligned                                \
     --phase test        		                            \
     --model vae_cycle_gan                                   \
