@@ -32,11 +32,11 @@ git clone git@github.com:cx921003/UPG-GAN.git
 cd UPG-GAN
 ```
 ### Data Preparation
-- Download a dataset from our [Google Drive](https://goo.gl/KRQ9tM).
+- Download a dataset from our [Google Drive](https://drive.google.com/drive/folders/11N29X2Y9m2vVkHYw0nfWE9IL01aDXyHl?usp=sharing).
 - Unzip the dataset under ``./datasets/`` folder.
 
 ### Pre-trained Models
-- Download a pre-trained model from our [Google Drive](https://goo.gl/YwcWvv).
+- Download a pre-trained model from our [Google Drive](https://drive.google.com/drive/folders/11N29X2Y9m2vVkHYw0nfWE9IL01aDXyHl?usp=sharing).
 - Unzip the model under ``./checkpoints/`` folder.
 
 ### Testing:
